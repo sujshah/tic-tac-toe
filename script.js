@@ -26,7 +26,29 @@ const gameBoard = (() => {
             element.textContent = gameArray[i].getContent();
         }
     };
-    return {gameArray, printBoard, assignMarker, emptyCell, renderGameBoard}
+    const checkAllEqual = (array) => {
+        const contents = array.map(x => x.getContent());
+        return contents.every(x => (x === contents[0]) && (contents[0] !== null))
+    }
+    const isWinner = () => {
+        for (let i = 0; i < 3; i++) {
+            const row = [gameArray[i * 3], gameArray[i * 3 + 1], gameArray[i + 3 + 2]];
+            const column = [gameArray[i], gameArray[i + 3], gameArray[i + 6]]
+            if (checkAllEqual(row) || checkAllEqual(column)) return true;
+        }
+        const diagonal_1 = [gameArray[0], gameArray[4], gameArray[8]];
+        const diagonal_2 = [gameArray[2], gameArray[4], gameArray[6]];
+        return !!(checkAllEqual(diagonal_1) || checkAllEqual(diagonal_2));
+    }
+
+    return {
+        gameArray,
+        printBoard,
+        assignMarker,
+        emptyCell,
+        renderGameBoard,
+        isWinner
+    }
 })();
 
 const gameController = (() => {
@@ -42,6 +64,9 @@ const gameController = (() => {
             gameBoard.assignMarker(position, currentPlayer);
             gameBoard.renderGameBoard();
             switchPlayer();
+            if (gameBoard.isWinner()) {
+                console.log(`${player1.getMarker()} Wins!`)
+            }
         }
     }
     const identifyClickLocation = (child) => {
