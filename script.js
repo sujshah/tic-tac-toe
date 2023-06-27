@@ -40,14 +40,17 @@ const gameBoard = (() => {
         const diagonal_2 = [gameArray[2], gameArray[4], gameArray[6]];
         return !!(checkAllEqual(diagonal_1) || checkAllEqual(diagonal_2));
     }
+    const resetBoard = () => {
+        gameArray = Array.from({length: 9}, cell);
+    }
 
     return {
-        gameArray,
         printBoard,
         assignMarker,
         emptyCell,
         renderGameBoard,
-        isWinner
+        isWinner,
+        resetBoard,
     }
 })();
 
@@ -59,14 +62,19 @@ const gameController = (() => {
         currentPlayer = currentPlayer === player1 ? player2 : player1
     }
     const playRound = (event) => {
+        if (gameBoard.isWinner()) return;
         const position = identifyClickLocation(event.target);
         if (gameBoard.emptyCell(position)) {
             gameBoard.assignMarker(position, currentPlayer);
             gameBoard.renderGameBoard();
-            switchPlayer();
             if (gameBoard.isWinner()) {
-                console.log(`${player1.getMarker()} Wins!`)
+                const winnerElement = document.createElement('div');
+                winnerElement.textContent = `${currentPlayer.getMarker()} Wins!`;
+                document.body.appendChild(winnerElement);
+                currentPlayer = player1;
+                return;
             }
+            switchPlayer();
         }
     }
     const identifyClickLocation = (child) => {
