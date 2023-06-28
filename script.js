@@ -42,6 +42,7 @@ const gameBoard = (() => {
     }
     const resetBoard = () => {
         gameArray = Array.from({length: 9}, cell);
+        renderGameBoard();
     }
 
     return {
@@ -69,6 +70,7 @@ const gameController = (() => {
             gameBoard.renderGameBoard();
             if (gameBoard.isWinner()) {
                 const winnerElement = document.createElement('div');
+                winnerElement.classList.add("winner")
                 winnerElement.textContent = `${currentPlayer.getMarker()} Wins!`;
                 document.body.appendChild(winnerElement);
                 currentPlayer = player1;
@@ -77,16 +79,43 @@ const gameController = (() => {
             switchPlayer();
         }
     }
+    const removeWinnerStatement = () => {
+        const winnerElement = document.getElementsByClassName('winner');
+        while (winnerElement[0]) {
+            winnerElement[0].parentNode.removeChild(winnerElement[0]);
+        }
+    }
     const identifyClickLocation = (child) => {
         return [].indexOf.call(child.parentNode.children, child);
     }
 
-    const playGame = () => {
-        const grid = document.querySelector(".board");
-        grid.addEventListener("click", playRound);
-    }
 
-    return {playGame}
+    return {playRound, removeWinnerStatement}
 })();
 
-gameController.playGame();
+const displayController = (() => {
+    const watchStartButton = () => {
+        const startButton = document.querySelector(".start");
+        startButton.addEventListener("click", startGame);
+    }
+    const watchResetButton = () => {
+        const startButton = document.querySelector(".reset");
+        startButton.addEventListener("click", resetGame);
+    }
+    const resetGame = () => {
+        gameBoard.resetBoard();
+        gameController.removeWinnerStatement();
+
+    }
+    const startGame = () => {
+        resetGame();
+        const grid = document.querySelector(".board");
+        grid.addEventListener("click", gameController.playRound);
+    }
+
+    return {watchStartButton, watchResetButton}
+})();
+
+displayController.watchStartButton();
+displayController.watchResetButton();
+

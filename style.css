@@ -2,3 +2,16 @@
     display: grid;
     grid-template: repeat(3, 100px) / repeat(3, 100px);
 }
+
+body {
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 10fr 3fr 1fr;
+}
+
+.board-element {
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+}
