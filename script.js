@@ -32,7 +32,7 @@ const gameBoard = (() => {
     }
     const isWinner = () => {
         for (let i = 0; i < 3; i++) {
-            const row = [gameArray[i * 3], gameArray[i * 3 + 1], gameArray[i + 3 + 2]];
+            const row = [gameArray[i * 3], gameArray[i * 3 + 1], gameArray[i * 3 + 2]];
             const column = [gameArray[i], gameArray[i + 3], gameArray[i + 6]]
             if (checkAllEqual(row) || checkAllEqual(column)) return true;
         }
