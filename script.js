@@ -1,3 +1,6 @@
+const X = "X";
+const O = "O";
+
 const Player = ((marker_type) => {
     const getMarker = () => {
         return marker_type;
@@ -23,8 +26,21 @@ const gameBoard = (() => {
         const grid = document.querySelector(".board").children;
         for (let i = 0; i < grid.length; i++) {
             const element = grid[i];
-            element.textContent = gameArray[i].getContent();
-        }
+            if (gameArray[i].getContent() === X) {
+                if (!(element.hasChildNodes())) {
+                    const node = document.createElement("div");
+                    node.classList.add("x")
+                    element.appendChild(node);
+                }
+            }
+            else if (gameArray[i].getContent() === O) {
+                if (!(element.hasChildNodes())) {
+                    const node = document.createElement("div");
+                    node.classList.add("o")
+                    element.appendChild(node);
+                }
+            }
+            }
     };
     const checkAllEqual = (array) => {
         const contents = array.map(x => x.getContent());
@@ -56,8 +72,8 @@ const gameBoard = (() => {
 })();
 
 const gameController = (() => {
-    const player1 = Player("X");
-    const player2 = Player("0");
+    const player1 = Player(X);
+    const player2 = Player(O);
     let currentPlayer = player1;
     const switchPlayer = () => {
         currentPlayer = currentPlayer === player1 ? player2 : player1

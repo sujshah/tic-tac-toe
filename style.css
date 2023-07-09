@@ -1,6 +1,7 @@
 .board {
     display: grid;
     grid-template: repeat(3, 13vh) / repeat(3, 13vh);
+    padding-bottom: 5vmin;
 }
 
 body {
@@ -14,12 +15,80 @@ body {
 
 .board-element {
     display: flex;
-    border: 1px solid white;
     justify-content: center;
     align-items: center;
 }
 
 .title {
     color: white;
-    font-size: 2vmax;
+    font-size: 5vmin;
+    font-weight: bold;
+    justify-self: stretch;
+    text-align: center;
+    align-self: center;
+}
+
+.top {
+    border-bottom: 5px solid white;
+}
+
+.middle {
+    border-bottom: 5px solid white;
+}
+
+.left {
+    border-right: 5px solid white;
+}
+
+.centre {
+    border-right: 5px solid white;
+}
+
+.pair {
+    color: white;
+}
+
+button {
+    cursor: pointer;
+}
+
+.x, .o {
+    /*position: relative;*/
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    animation: appear .2s cubic-bezier(0.5, 1.8, 0.1, 1.1);
+    width: 100%;
+    height: 85%;
+    justify-self: center;
+}
+
+.x:before {
+    transform: rotate(-45deg);
+}
+
+.x:after {
+    transform: rotate(45deg);
+}
+
+.x:before, .x:after {
+    position: absolute;
+    content: "";
+    display: block;
+    background-color: #fff;
+    left: 45%;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    border-radius: 4px;
+    justify-self: center;
+    align-self: center;
+}
+
+.o {
+    left: 16.666666667%;
+    top: 16.666666667%;
+    width: 66.666666667%;
+    height: 66.666666667%;
+    border-radius: 50%;
+    border: 9px solid #fff;
 }
