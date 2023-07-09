@@ -87,8 +87,8 @@ button {
 .o {
     left: 16.666666667%;
     top: 16.666666667%;
-    width: 66.666666667%;
-    height: 66.666666667%;
+    width: 56.666666667%;
+    height: 56.666666667%;
     border-radius: 50%;
-    border: 9px solid #fff;
+    border: 1vmin solid #fff;
 }
