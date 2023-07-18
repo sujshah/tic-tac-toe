@@ -32,15 +32,16 @@ const gameBoard = (() => {
                     node.classList.add("x")
                     element.appendChild(node);
                 }
-            }
-            else if (gameArray[i].getContent() === O) {
+            } else if (gameArray[i].getContent() === O) {
                 if (!(element.hasChildNodes())) {
                     const node = document.createElement("div");
                     node.classList.add("o")
                     element.appendChild(node);
                 }
+            } else {
+                element.innerHTML = "";
             }
-            }
+        }
     };
     const checkAllEqual = (array) => {
         const contents = array.map(x => x.getContent());
