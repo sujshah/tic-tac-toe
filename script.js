@@ -111,10 +111,6 @@ const gameController = (() => {
 })();
 
 const displayController = (() => {
-    const watchStartButton = () => {
-        const startButton = document.querySelector(".start");
-        startButton.addEventListener("click", startGame);
-    }
     const watchResetButton = () => {
         const startButton = document.querySelector(".reset");
         startButton.addEventListener("click", resetGame);
@@ -130,9 +126,9 @@ const displayController = (() => {
         grid.addEventListener("click", gameController.playRound);
     }
 
-    return {watchStartButton, watchResetButton}
+    return {startGame, watchResetButton}
 })();
 
-displayController.watchStartButton();
+displayController.startGame();
 displayController.watchResetButton();
 
