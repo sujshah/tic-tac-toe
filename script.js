@@ -131,11 +131,10 @@ const displayController = (() => {
     const resetGame = () => {
         gameBoard.resetBoard();
         gameController.removeWinnerStatement();
-
+        gameController.markPlayer();
     }
     const startGame = () => {
         resetGame();
-        gameController.markPlayer();
         const grid = document.querySelector(".board");
         grid.addEventListener("click", gameController.playRound);
     }
