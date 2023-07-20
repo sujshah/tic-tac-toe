@@ -166,5 +166,11 @@ button {
     border-radius: 20px;
     border-color: white;
     border-width: 0.15em;
-    margin-top: 5vmax;
+    margin-top: 3vmax;
+}
+
+.winner {
+    text-align: center;
+    font-size: 1.5vmax;
+    margin-top: 1.5vmax;
 }

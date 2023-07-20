@@ -1,6 +1,8 @@
 const X = "X";
 const O = "O";
 
+
+
 const Player = ((marker_type) => {
     const getMarker = () => {
         return marker_type;
@@ -76,6 +78,16 @@ const gameController = (() => {
     const player1 = Player(X);
     const player2 = Player(O);
     let currentPlayer = player1;
+    const markPlayer = () => {
+        const id = currentPlayer.getMarker() === X ? "playerOne" : "playerTwo";
+        const other = currentPlayer.getMarker() === X ? "playerTwo" : "playerOne";
+        const element = document.getElementById(id);
+        const otherElement = document.getElementById(other);
+        element.disabled = false;
+        element.focus();
+        otherElement.disabled = true;
+    }
+
     const switchPlayer = () => {
         currentPlayer = currentPlayer === player1 ? player2 : player1
     }
@@ -94,6 +106,7 @@ const gameController = (() => {
                 return;
             }
             switchPlayer();
+            markPlayer();
         }
     }
     const removeWinnerStatement = () => {
@@ -107,7 +120,7 @@ const gameController = (() => {
     }
 
 
-    return {playRound, removeWinnerStatement}
+    return {playRound, removeWinnerStatement, markPlayer}
 })();
 
 const displayController = (() => {
@@ -122,6 +135,7 @@ const displayController = (() => {
     }
     const startGame = () => {
         resetGame();
+        gameController.markPlayer();
         const grid = document.querySelector(".board");
         grid.addEventListener("click", gameController.playRound);
     }
